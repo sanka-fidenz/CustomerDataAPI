@@ -47,12 +47,6 @@ class EndpointFilterUtility
         var taskArgument = context.GetArgument<User>(1);
         var errors = new Dictionary<string, string[]>();
 
-        // validate name
-        if (string.IsNullOrWhiteSpace(taskArgument.Name))
-        {
-            errors.Add(nameof(User.Name), ["Cannot be empty"]);
-        }
-
         // validate email
         var email = new EmailAddressAttribute();
         if (!email.IsValid(taskArgument.Email))

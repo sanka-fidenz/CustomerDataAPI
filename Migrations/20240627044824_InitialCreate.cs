@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -17,12 +15,11 @@ namespace CustomerData.Migrations
                 name: "Addresses",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     Number = table.Column<int>(type: "integer", nullable: false),
-                    Street = table.Column<string>(type: "text", nullable: false),
-                    City = table.Column<string>(type: "text", nullable: false),
-                    State = table.Column<string>(type: "text", nullable: false),
+                    Street = table.Column<string>(type: "text", nullable: true),
+                    City = table.Column<string>(type: "text", nullable: true),
+                    State = table.Column<string>(type: "text", nullable: true),
                     Zipcode = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -37,18 +34,18 @@ namespace CustomerData.Migrations
                     Id = table.Column<string>(type: "text", nullable: false),
                     Index = table.Column<int>(type: "integer", nullable: false),
                     Age = table.Column<int>(type: "integer", nullable: false),
-                    EyeColor = table.Column<string>(type: "text", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Gender = table.Column<string>(type: "text", nullable: false),
-                    Company = table.Column<string>(type: "text", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false),
-                    Phone = table.Column<string>(type: "text", nullable: false),
-                    AddressId = table.Column<int>(type: "integer", nullable: false),
-                    About = table.Column<string>(type: "text", nullable: false),
-                    Registered = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EyeColor = table.Column<string>(type: "text", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Gender = table.Column<string>(type: "text", nullable: true),
+                    Company = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    Phone = table.Column<string>(type: "text", nullable: true),
+                    About = table.Column<string>(type: "text", nullable: true),
+                    Registered = table.Column<string>(type: "text", nullable: true),
                     Latitude = table.Column<double>(type: "double precision", nullable: false),
                     Longitude = table.Column<double>(type: "double precision", nullable: false),
-                    Tags = table.Column<List<string>>(type: "text[]", nullable: false)
+                    Tags = table.Column<List<string>>(type: "text[]", nullable: true),
+                    AddressId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -57,8 +54,7 @@ namespace CustomerData.Migrations
                         name: "FK_Users_Addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Addresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
